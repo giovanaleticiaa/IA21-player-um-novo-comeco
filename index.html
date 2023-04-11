@@ -1,77 +1,73 @@
 <!DOCTYPE html>
-<html long="pt-BR">
+<html lang="pt-BR">
 <head>
-    <meta charset='utf-8'>
-    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta charset="utf8">
     <title>Player</title>
-    <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
-    <script src='main.js'></script>
     <style>
-        *{
+        * {
             box-sizing: border-box;
         }
-
+        
         div.ia21-player {
             display: flex;
             flex-direction: column;
             border: 1px solid black;
-            width: 720px;
+            width: 200px;
         }
-
+        
         div.ia21-player video {
             width: 100%;
         }
-
-        div.ia21-player div.controllers{
+        
+        div.ia21-player div.controllers { 
             display: flex;
             border-top: 1px solid black;
             column-gap: 10px;
         }
-
-        div.ia21-player div.controllers button.play-pause{
+        
+        div.ia21-player div.controllers button.play-pause {
             background-color: transparent;
             border: 0 none;
             border-right: 1px solid black;
             cursor: pointer;
         }
-
-        div.ia21-player div.controllers div.dragbar{
+        
+        div.ia21-player div.controllers div.dragbar {
             flex-grow: 1;
             position: relative;
         }
-
-        div.ia21-player div.controllers div.dragbar::before{
+        
+        div.ia21-player div.controllers div.dragbar:before {
             content: " ";
             position: absolute;
             top: calc(50% - .5px);
             border-top: 1px solid black;
             width: 100%;
-        }    
-
-
-        div.ia21-player div.controllers div.dragbar div.draggable{
-            background-color: red;
+        }
+        
+        div.ia21-player div.controllers div.dragbar div.draggable {
+            --percent: 0%;
+            background-color: black;
             width: .5rem;
-            height: .5em;
+            height: .5rem;
             border-radius: 50%;
             cursor: pointer;
             position: absolute;
             top: calc(50% - .25rem);
+            left: calc(var(--percent) - .25rem)
         }
-
     </style>
 </head>
 <body>
-
+    
     <div class="ia21-player">
         <video>
-            <source src="https://www.w3schools.com/html/movie.mp4" type="video/mp4">
-            <source src="https://www.w3schools.com/html/movie.ogg" type="video/ogg">
+            <!-- https://gist.github.com/jsturgis/3b19447b304616f18657 -->
+            <source src="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" type="video/mp4">
         </video>
         <div class="controllers">
-            <button class="play-pause" data-delete="⏸">
-                ▶
+            <button class="play-pause" data-deleteme="⏸">
+                ▶ 
             </button>
             <div class="dragbar timeline">
                 <div class="draggable"></div>
@@ -84,35 +80,28 @@
             </div>
         </div>
     </div>
-
-    <div class="ia21-player">
-        <video>
-            <source src="https://www.w3schools.com/html/movie.mp4" type="video/mp4">
-            <source src="https://www.w3schools.com/html/movie.ogg" type="video/ogg">
-        </video>
-        <div class="controllers">
-            <button class="play-pause" data-delete="⏸">
-                ▶
-            </button>
-            <div class="dragbar timeline">
-                <div class="draggable"></div>
-            </div>
-            <div class="timer">
-                00:00
-            </div>
-            <div class="dragbar volume">
-                <div class="draggable"></div>
-            </div>
-        </div>
-    </div>
-
+    
     <script>
         const containers = document.querySelectorAll("div.ia21-player")
-
-        containers.forEach(el => {
-            const playPause = el.querySelector("button.play-pause")
-            const video = el.querySelector("video")
-            playPause.onclick = () => video.play()
+       
+        containers.forEach(container => { 
+            const btPlayPause = container.querySelector("button.play-pause")
+            const video = container.querySelector("video")
+            const timeline = container.querySelector(".dragbar.timeline")
+            const timelineDrag = timeline.querySelector(".draggable")
+            const timer = container.querySelector(".timer")
+            btPlayPause.addEventListener("click", () => video.play())
+            video.currentTime = 58
+            video.addEventListener("timeupdate", () => {
+                const percent = (video.currentTime / video.duration) * 100
+                timelineDrag.style.setProperty("--percent", `${percent}%`) 
+                timer.innerText = Math.floor(video.currentTime)
+                if (timer.innerText >= 60) {
+                    min = Math.floor(timer.innerText/60)
+                    seg = Math.floor(timer.innerText%60)
+                    timer.innerText = min + ":" + seg
+                }
+            })
         })
     </script>
 </body>
