@@ -12,7 +12,7 @@
             display: flex;
             flex-direction: column;
             border: 1px solid black;
-            width: 200px;
+            width: 700px;
         }
         
         div.ia21-player video {
@@ -62,11 +62,10 @@
     
     <div class="ia21-player">
         <video>
-            <!-- https://gist.github.com/jsturgis/3b19447b304616f18657 -->
             <source src="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" type="video/mp4">
         </video>
         <div class="controllers">
-            <button class="play-pause" data-deleteme="⏸">
+            <button class="play-pause" data-pause-icon="II" data-play-icon="▶">
                 ▶ 
             </button>
             <div class="dragbar timeline">
@@ -83,15 +82,27 @@
     
     <script>
         const containers = document.querySelectorAll("div.ia21-player")
-       
+        
         containers.forEach(container => { 
             const btPlayPause = container.querySelector("button.play-pause")
             const video = container.querySelector("video")
             const timeline = container.querySelector(".dragbar.timeline")
             const timelineDrag = timeline.querySelector(".draggable")
             const timer = container.querySelector(".timer")
-            btPlayPause.addEventListener("click", () => video.play())
-            video.currentTime = 58
+            
+            btPlayPause.addEventListener("click", () => {
+                if (video.paused) {
+                    video.play()
+                    btPlayPause.innerText = btPlayPause.dataset.pauseIcon
+                    return
+                }
+                
+                video.pause()
+                btPlayPause.innerText = btPlayPause.dataset.playIcon
+            })
+            
+            
+            video.currentTime = 0
             video.addEventListener("timeupdate", () => {
                 const percent = (video.currentTime / video.duration) * 100
                 timelineDrag.style.setProperty("--percent", `${percent}%`) 
