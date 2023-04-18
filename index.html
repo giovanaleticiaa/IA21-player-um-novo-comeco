@@ -7,12 +7,20 @@
         * {
             box-sizing: border-box;
         }
+
+        body {
+            background-color: #eccde7;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
         
         div.ia21-player {
+            margin-top: 11%;
             display: flex;
             flex-direction: column;
-            border: 1px solid black;
-            width: 700px;
+            border: 2px solid black;
+            width: 720px;
         }
         
         div.ia21-player video {
@@ -21,7 +29,7 @@
         
         div.ia21-player div.controllers { 
             display: flex;
-            border-top: 1px solid black;
+            border-top: 2px solid black;
             column-gap: 10px;
         }
         
@@ -41,7 +49,7 @@
             content: " ";
             position: absolute;
             top: calc(50% - .5px);
-            border-top: 1px solid black;
+            border-top: 2px solid black;
             width: 100%;
         }
         
@@ -103,17 +111,45 @@
             
             
             video.currentTime = 0
+
             video.addEventListener("timeupdate", () => {
                 const percent = (video.currentTime / video.duration) * 100
-                timelineDrag.style.setProperty("--percent", `${percent}%`) 
+                timelineDrag.style.setProperty("--percent", `${percent}%`)
                 timer.innerText = Math.floor(video.currentTime)
+
                 if (timer.innerText >= 60) {
                     min = Math.floor(timer.innerText/60)
                     seg = Math.floor(timer.innerText%60)
                     timer.innerText = min + ":" + seg
                 }
             })
+            
+            // ---✀------------------------------------------------------
+            
+            const dragbars = container.querySelectorAll(".dragbar")
+            
+            dragbars.forEach(dragbar => {
+                const dragabble = dragbar.querySelector(".draggable")
+
+                dragbar.addEventListener("click", ev => {
+                    const width = Math.floor(dragbar.getBoundingClientRect().width)
+                    const index = ev.offsetX / width
+                    const percent = index * 100
+                    dragabble.style.setProperty("--percent", `${percent}%`)
+
+                    if (dragbar.classList.contains("timeline")) {
+                        video.currentTime = video.duration * index
+                        return
+                    }
+
+                    if (dragbar.classList.contains("volume")) {
+                        video.volume = index
+                        return
+                    }
+                })
+            })
         })
     </script>
 </body>
+
 </html>
