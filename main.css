@@ -1,20 +1,34 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald&family=Roboto+Condensed&display=swap');
+
 * {
     box-sizing: border-box;
 }
 
 body {
-    background-color: #c0aeeb;
+    background-color: #bab0f7;
     display: flex;
+    height: 100%;
     justify-content: center;
+    flex-direction: column;
     align-items: center;
 }
 
+.imagem {
+    border: 2px solid green;
+    height: 10em;
+    width: 50em;
+}
+
+
 div.ia21-player {
-    margin-top: 8em;
+    border-radius: 10px;
     display: flex;
     flex-direction: column;
-    border: 3px solid black;
+    border: 4px solid rgb(140, 0, 255);
+    border-style: ridge;
     width: 70em;
+    font-family: 'Roboto Condensed', sans-serif;
+    box-shadow: 10px 10px 250px rgb(140, 0, 255);
 }
 
 div.ia21-player video {
@@ -23,15 +37,27 @@ div.ia21-player video {
 
 div.ia21-player div.controllers { 
     display: flex;
-    border-top: 3px solid black;
+    border-top: 4px solid rgb(140, 0, 255);
     column-gap: 10px;
-    padding: 0.5em;
 }
 
 div.ia21-player div.controllers button.play-pause, button.iconVolume, button.iconEngrenagem {
     background-color: transparent;
     border: 0 none;
     cursor: pointer;
+    border-right: 3px solid black;
+}
+
+button.iconVolume, button.iconEngrenagem {
+    border-left: 3px solid black;
+    border-right: 3px solid black;
+}
+
+button.iconVoltar{
+    background-color: transparent;
+    border: 0 none;
+    cursor: pointer;
+    
 }
 
 div.ia21-player div.controllers div.dragbar {
@@ -56,5 +82,16 @@ div.ia21-player div.controllers div.dragbar div.draggable {
     cursor: pointer;
     position: absolute;
     top: calc(50% - .25rem);
-    left: calc(var(--percent) - .25rem)
+    left: calc(var(--percent) - .25rem);
+    pointer-events: none;
+}
+
+div.ia21-player div.controllers div.dragbar.timeline {
+    width: 40%;
+}
+
+div.ia21-player div.controllers div.timer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
