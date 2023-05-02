@@ -7,18 +7,25 @@
 body {
     background-color: #bab0f7;
     display: flex;
-    height: 100%;
-    justify-content: center;
     flex-direction: column;
+    justify-content: center;
     align-items: center;
 }
 
-.imagem {
-    border: 2px solid green;
-    height: 10em;
-    width: 50em;
+div.barra {
+    width: 30em;
+    height: 2em;
+    border: 2px solid black;
+    border-radius: 10px;
+    margin-top: 4em;
+    cursor: pointer;
 }
 
+div.search {
+    color: rgb(92, 92, 92);
+    margin-left: 2em;
+    margin-top: -1em;
+}
 
 div.ia21-player {
     border-radius: 10px;
@@ -26,9 +33,10 @@ div.ia21-player {
     flex-direction: column;
     border: 4px solid rgb(140, 0, 255);
     border-style: ridge;
-    width: 70em;
+    width: 50em;
     font-family: 'Roboto Condensed', sans-serif;
     box-shadow: 10px 10px 250px rgb(140, 0, 255);
+    margin-top: 3em;
 }
 
 div.ia21-player video {
@@ -53,11 +61,18 @@ button.iconVolume, button.iconEngrenagem {
     border-right: 3px solid black;
 }
 
-button.iconVoltar{
+button.iconVoltar {
     background-color: transparent;
     border: 0 none;
     cursor: pointer;
     
+}
+
+button.iconLupa {
+    background-color: transparent;
+    border: 0 none;
+    cursor: pointer;
+    margin-top: 0.2em;
 }
 
 div.ia21-player div.controllers div.dragbar {
