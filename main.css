@@ -12,13 +12,20 @@ body {
     align-items: center;
 }
 
+img {
+    margin-right: 38em;
+    width: 10em;
+    margin-top: 4em;
+}
+
 div.barra {
-    width: 30em;
+    width: 37em;
     height: 2em;
     border: 2px solid black;
     border-radius: 10px;
-    margin-top: 4em;
+    margin-top: -2em;
     cursor: pointer;
+    margin-left: 11em;
 }
 
 div.search {
@@ -53,12 +60,12 @@ div.ia21-player div.controllers button.play-pause, button.iconVolume, button.ico
     background-color: transparent;
     border: 0 none;
     cursor: pointer;
-    border-right: 3px solid black;
+    border-right: 3px solid rgb(140, 0, 255);
 }
 
 button.iconVolume, button.iconEngrenagem {
-    border-left: 3px solid black;
-    border-right: 3px solid black;
+    border-left: 3px solid rgb(140, 0, 255);
+    border-right: 3px solid rgb(140, 0, 255);
 }
 
 button.iconVoltar {
