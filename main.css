@@ -1,0 +1,60 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #c0aeeb;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+div.ia21-player {
+    margin-top: 8em;
+    display: flex;
+    flex-direction: column;
+    border: 3px solid black;
+    width: 70em;
+}
+
+div.ia21-player video {
+    width: 100%;
+}
+
+div.ia21-player div.controllers { 
+    display: flex;
+    border-top: 3px solid black;
+    column-gap: 10px;
+    padding: 0.5em;
+}
+
+div.ia21-player div.controllers button.play-pause, button.iconVolume, button.iconEngrenagem {
+    background-color: transparent;
+    border: 0 none;
+    cursor: pointer;
+}
+
+div.ia21-player div.controllers div.dragbar {
+    flex-grow: 1;
+    position: relative;
+}
+
+div.ia21-player div.controllers div.dragbar:before {
+    content: " ";
+    position: absolute;
+    top: calc(50% - .5px);
+    border-top: 2px solid black;
+    width: 100%;
+}
+
+div.ia21-player div.controllers div.dragbar div.draggable {
+    --percent: 0%;
+    background-color: black;
+    width: .5rem;
+    height: .5rem;
+    border-radius: 50%;
+    cursor: pointer;
+    position: absolute;
+    top: calc(50% - .25rem);
+    left: calc(var(--percent) - .25rem)
+}

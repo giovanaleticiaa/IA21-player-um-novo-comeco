@@ -3,70 +3,13 @@
 <head>
     <meta charset="utf8">
     <title>Player</title>
-    <style>
-        * {
-            box-sizing: border-box;
-        }
-
-        body {
-            background-color: #eccde7;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        
-        div.ia21-player {
-            margin-top: 11%;
-            display: flex;
-            flex-direction: column;
-            border: 2px solid black;
-            width: 720px;
-        }
-        
-        div.ia21-player video {
-            width: 100%;
-        }
-        
-        div.ia21-player div.controllers { 
-            display: flex;
-            border-top: 2px solid black;
-            column-gap: 10px;
-        }
-        
-        div.ia21-player div.controllers button.play-pause {
-            background-color: transparent;
-            border: 0 none;
-            border-right: 1px solid black;
-            cursor: pointer;
-        }
-        
-        div.ia21-player div.controllers div.dragbar {
-            flex-grow: 1;
-            position: relative;
-        }
-        
-        div.ia21-player div.controllers div.dragbar:before {
-            content: " ";
-            position: absolute;
-            top: calc(50% - .5px);
-            border-top: 2px solid black;
-            width: 100%;
-        }
-        
-        div.ia21-player div.controllers div.dragbar div.draggable {
-            --percent: 0%;
-            background-color: black;
-            width: .5rem;
-            height: .5rem;
-            border-radius: 50%;
-            cursor: pointer;
-            position: absolute;
-            top: calc(50% - .25rem);
-            left: calc(var(--percent) - .25rem)
-        }
-    </style>
+    <link rel="stylesheet" href="main.css">
+    <script defer async src="main.js"></script>
 </head>
 <body>
+    <!--<div>
+        <img src="barra.png" alt="Barra-de-Pesquisa">
+    </div>-->
     
     <div class="ia21-player">
         <video>
@@ -80,76 +23,20 @@
                 <div class="draggable"></div>
             </div>
             <div class="timer">
-                00:00
+                00:00:00
             </div>
+            <button class="iconVolume">
+                🔊
+            </button>
             <div class="dragbar volume">
                 <div class="draggable"></div>
             </div>
+            <button class="iconEngrenagem">
+                ⚙️
+            </button>
         </div>
     </div>
     
-    <script>
-        const containers = document.querySelectorAll("div.ia21-player")
-        
-        containers.forEach(container => { 
-            const btPlayPause = container.querySelector("button.play-pause")
-            const video = container.querySelector("video")
-            const timeline = container.querySelector(".dragbar.timeline")
-            const timelineDrag = timeline.querySelector(".draggable")
-            const timer = container.querySelector(".timer")
-            
-            btPlayPause.addEventListener("click", () => {
-                if (video.paused) {
-                    video.play()
-                    btPlayPause.innerText = btPlayPause.dataset.pauseIcon
-                    return
-                }
-                
-                video.pause()
-                btPlayPause.innerText = btPlayPause.dataset.playIcon
-            })
-            
-            
-            video.currentTime = 0
-
-            video.addEventListener("timeupdate", () => {
-                const percent = (video.currentTime / video.duration) * 100
-                timelineDrag.style.setProperty("--percent", `${percent}%`)
-                timer.innerText = Math.floor(video.currentTime)
-
-                if (timer.innerText >= 60) {
-                    min = Math.floor(timer.innerText/60)
-                    seg = Math.floor(timer.innerText%60)
-                    timer.innerText = min + ":" + seg
-                }
-            })
-            
-            // ---✀------------------------------------------------------
-            
-            const dragbars = container.querySelectorAll(".dragbar")
-            
-            dragbars.forEach(dragbar => {
-                const dragabble = dragbar.querySelector(".draggable")
-
-                dragbar.addEventListener("click", ev => {
-                    const width = Math.floor(dragbar.getBoundingClientRect().width)
-                    const index = ev.offsetX / width
-                    const percent = index * 100
-                    dragabble.style.setProperty("--percent", `${percent}%`)
-
-                    if (dragbar.classList.contains("timeline")) {
-                        video.currentTime = video.duration * index
-                        return
-                    }
-
-                    if (dragbar.classList.contains("volume")) {
-                        video.volume = index
-                        return
-                    }
-                })
-            })
-        })
-    </script>
 </body>
 
 </html>
