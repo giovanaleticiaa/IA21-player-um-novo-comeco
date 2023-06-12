@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Teste</title>
+  <style>
+
+    button {
+    margin-top: 15px;
+    align-items: center;
+    background-color: lightpink;
+    border: 2px solid #111;
+    border-radius: 8px;
+    box-sizing: border-box;
+    color: #111;
+    cursor: pointer;
+    display: block;
+    font-family: Inter,sans-serif;
+    font-size: 16px;
+    height: 48px;
+    justify-content: center;
+    line-height: 24px;
+    max-width: 100%;
+    padding: 0 25px;
+    position: relative;
+    text-align: center;
+    text-decoration: none;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+}
+
+    button:after {
+    background-color: #111;
+    border-radius: 8px;
+    content: "";
+    display: block;
+    height: 48px;
+    left: 0;
+    width: 100%;
+    position: absolute;
+    top: -2px;
+    transform: translate(8px, 8px);
+    transition: transform .2s ease-out;
+    z-index: -1;
+}
+
+    button:hover:after {
+    transform: translate(0, 0);
+}
+
+    button:active {
+    background-color: lightpink;
+    outline: 0;
+}
+
+    button:hover {
+    outline: 0;
+}
+
+@media (min-width: 768px) {
+    button {
+    padding: 0 40px;
+  }
+}        
+  </style>
+</head>
+<body>
+  <script>
+    async function main() {
+      const request = await fetch("meus-dados.json")
+      const data = await request.json()
+      const year = new Date().getFullYear()
+
+      data.forEach(pessoa => {
+        document.body.innerHTML += `<button>
+            ${pessoa.nome}, 
+            ${year - pessoa["data-nascimento"][0]}, 
+            ${pessoa["usa-oculos"] ? "Usa Óculos" : ""}
+          </button>` 
+      })
+    }
+    main()
+  </script>
+</body>
+</html>

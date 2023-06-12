@@ -1,0 +1,38 @@
+[   
+  {
+    "nome": "Giovana",
+    "data-nascimento": [2005,10,7],
+    "usa-oculos": false
+  },
+
+  {
+    "nome": "Natcheli",
+    "data-nascimento": [2005,11,17],
+    "usa-oculos": true
+  },
+
+  {
+    "nome": "Elane",
+    "data-nascimento": [2004,9,23],
+    "usa-oculos": true
+  },
+
+  {
+    "nome": "Luana",
+    "data-nascimento": [2006,1,22],
+    "usa-oculos": false
+  },
+
+  {
+    "nome": "Beatriz",
+    "data-nascimento": [2006,2,16],
+    "usa-oculos": false
+  },
+
+  {
+    "nome": "Guilherme",
+    "data-nascimento": [2005,4,15],
+    "usa-oculos": false
+  }
+  
+]
